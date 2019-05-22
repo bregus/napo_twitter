@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserTableViewCell" rowHeight="84" id="09a-kH-Dzo" customClass="UserTableViewCell" customModule="twitter" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="84"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="09a-kH-Dzo" id="Zeo-XH-zpe">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="83.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="asdfsdfasfad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p5B-sh-H5W">
+                        <rect key="frame" x="73" y="12" width="96.5" height="18"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Снимок экрана 2019-05-14 в 0.50.27.png" translatesAutoresizingMaskIntoConstraints="NO" id="P9q-Xw-qWN">
+                        <rect key="frame" x="173" y="9.5" width="24" height="23.5"/>
+                        <color key="tintColor" name="systemYellowColor" catalog="System" colorSpace="catalog"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23.5" id="YyA-iN-ugF"/>
+                            <constraint firstAttribute="width" constant="24" id="h8b-xE-kmu"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HHS-u4-3LO">
+                        <rect key="frame" x="13" y="15" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="czD-6M-wTe"/>
+                            <constraint firstAttribute="width" constant="50" id="dvX-lW-eHC"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="@ggg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3V-AF-PPC">
+                        <rect key="frame" x="73" y="31" width="40.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="15"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sz0-0l-Jkd">
+                        <rect key="frame" x="73" y="55" width="321" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="a3b-fn-Mch"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n0o-Rc-Rvn">
+                        <rect key="frame" x="308" y="12" width="86" height="30"/>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="86" id="M41-LL-7rK"/>
+                        </constraints>
+                        <state key="normal" title="Following">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="o3V-AF-PPC" firstAttribute="leading" secondItem="p5B-sh-H5W" secondAttribute="leading" id="BUZ-O2-GQf"/>
+                    <constraint firstItem="n0o-Rc-Rvn" firstAttribute="top" secondItem="Zeo-XH-zpe" secondAttribute="top" constant="12" id="Cfz-Fv-SyY"/>
+                    <constraint firstAttribute="bottom" secondItem="sz0-0l-Jkd" secondAttribute="bottom" constant="7.5" id="N9u-ro-1Eg"/>
+                    <constraint firstAttribute="trailing" secondItem="n0o-Rc-Rvn" secondAttribute="trailing" constant="20" id="Sy4-6F-OzY"/>
+                    <constraint firstItem="sz0-0l-Jkd" firstAttribute="top" secondItem="o3V-AF-PPC" secondAttribute="bottom" constant="6" id="UKJ-BX-4Eb"/>
+                    <constraint firstItem="HHS-u4-3LO" firstAttribute="leading" secondItem="Zeo-XH-zpe" secondAttribute="leading" constant="13" id="YZ7-52-819"/>
+                    <constraint firstItem="p5B-sh-H5W" firstAttribute="leading" secondItem="HHS-u4-3LO" secondAttribute="trailing" constant="10" id="Yj5-zu-JDY"/>
+                    <constraint firstItem="P9q-Xw-qWN" firstAttribute="leading" secondItem="p5B-sh-H5W" secondAttribute="trailing" constant="3.5" id="ZTe-uM-I9H"/>
+                    <constraint firstItem="HHS-u4-3LO" firstAttribute="top" secondItem="Zeo-XH-zpe" secondAttribute="top" constant="15" id="dxn-te-xfz"/>
+                    <constraint firstItem="P9q-Xw-qWN" firstAttribute="centerY" secondItem="p5B-sh-H5W" secondAttribute="centerY" id="goz-WX-YKn"/>
+                    <constraint firstItem="sz0-0l-Jkd" firstAttribute="leading" secondItem="o3V-AF-PPC" secondAttribute="leading" id="hco-15-l8S"/>
+                    <constraint firstItem="p5B-sh-H5W" firstAttribute="top" secondItem="Zeo-XH-zpe" secondAttribute="top" constant="12" id="lfX-WD-j7z"/>
+                    <constraint firstItem="o3V-AF-PPC" firstAttribute="top" secondItem="p5B-sh-H5W" secondAttribute="bottom" constant="1" id="q6a-PP-58h"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="decs" destination="sz0-0l-Jkd" id="RyN-70-ywP"/>
+                <outlet property="descHeightConstraint" destination="a3b-fn-Mch" id="5b2-hm-W7T"/>
+                <outlet property="followButton" destination="n0o-Rc-Rvn" id="bhl-BO-09s"/>
+                <outlet property="lockImage" destination="P9q-Xw-qWN" id="e4S-yb-0n0"/>
+                <outlet property="name" destination="o3V-AF-PPC" id="hVG-zU-Xgb"/>
+                <outlet property="nickname" destination="p5B-sh-H5W" id="1wc-73-95e"/>
+                <outlet property="profileButton" destination="HHS-u4-3LO" id="6Pl-jK-kl8"/>
+            </connections>
+            <point key="canvasLocation" x="40.579710144927539" y="82.366071428571431"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Снимок экрана 2019-05-14 в 0.50.27.png" width="59" height="57"/>
+    </resources>
+</document>

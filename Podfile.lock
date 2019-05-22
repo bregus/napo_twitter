@@ -1,0 +1,28 @@
+PODS:
+  - Alamofire (4.8.2)
+  - AlamofireImage (3.5.2):
+    - Alamofire (~> 4.8)
+  - HidingNavigationBar (2.0.1)
+  - STTwitter (0.2.6)
+
+DEPENDENCIES:
+  - AlamofireImage
+  - HidingNavigationBar (~> 2.0)
+  - STTwitter
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - AlamofireImage
+    - HidingNavigationBar
+    - STTwitter
+
+SPEC CHECKSUMS:
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
+  HidingNavigationBar: 82c06978041080f0e4d97095563414a4367b71c6
+  STTwitter: 30ee2f79eff78c3d633a1edc869e97db9c9ead59
+
+PODFILE CHECKSUM: 8ed5046fdbc6e7ccc6fd3fcad9548c02fb45da31
+
+COCOAPODS: 1.6.1
