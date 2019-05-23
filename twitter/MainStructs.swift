@@ -11,11 +11,14 @@ import Foundation
 import STTwitter
 
 class User {
-    static var username: String = "@smodsd"
-    static var name: String = "tt"
-    static var profilePhoto: UIImage = #imageLiteral(resourceName: "C4rWY7Vtp7g.jpg")
-    static var following: Int = 10
-    static var followers: Int = 433
+    var username: String = ""
+    var name: String = ""
+    var profilePhoto: UIImage = #imageLiteral(resourceName: "lock")
+    var following: Int = 0
+    var followers: Int = 0
+    var isProtected: Bool = false
+    var isVerified: Bool = false
+    static var current: User = User()
 }
 
 class TwitterClient {
@@ -32,4 +35,6 @@ struct HomeStatus {
     var isProtected: Bool?
     var isVerified: Bool?
     var in_reply_to_screen_name: String?
+    var id: Int64?
+    var retweetedUser: String?
 }

@@ -20,27 +20,31 @@ class SideBarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        profilePhoto.setImage(User.profilePhoto, for: .normal)
         profilePhoto.layer.cornerRadius = profilePhoto.frame.width / 2
         profilePhoto.imageView?.layer.cornerRadius = profilePhoto.frame.width / 2
-        
-        name.text = User.name
-        username.text = User.username
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
         
-        var attributedText = NSMutableAttributedString(string: "\(User.following)", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: Notification.Name("didReceiveData"), object: nil)
+    }
+
+    @objc func onDidReceiveData(_ notification:Notification) {
+        name.text = User.current.name
+        username.text = User.current.username
+        profilePhoto.setImage(User.current.profilePhoto, for: .normal)
+        
+        var attributedText = NSMutableAttributedString(string: "\(User.current.following)", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
         attributedText.append(NSMutableAttributedString(string: " Following", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.gray]))
         followingButton.setAttributedTitle(attributedText, for: .normal)
         
-        attributedText = NSMutableAttributedString(string: "\(User.followers)", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedText = NSMutableAttributedString(string: "\(User.current.followers)", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
         attributedText.append(NSMutableAttributedString(string: " Follower", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.gray]))
         followerButton.setAttributedTitle(attributedText, for: .normal)
     }
-
+    
     @IBAction func profilePhotoTapped(_ sender: Any) {
         delegate?.buttonTapped(with: 0)
     }
@@ -106,3 +110,4 @@ protocol MenuSelected: class {
     func tableViewTapped(at indexPath: IndexPath)
     func buttonTapped(with id: Int)
 }
+

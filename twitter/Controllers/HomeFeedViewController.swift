@@ -14,13 +14,14 @@ import AlamofireImage
 class HomeFeedViewController: UIViewController {
     
     weak var delegate: SideMenuDelegate?
-    var homeStatuses: [HomeStatus]?
+    var homeStatuses = [HomeStatus]()
+    var lastTweetId: Int64?
     
     @IBOutlet weak var tableView: UITableView!
     var hidingNavBarManager: HidingNavigationBarManager?
     let profileButton: UIButton = {
         let button = UIButton(type: .system)
-        let image = User.profilePhoto.resize(targetSize: CGSize(width: 35, height: 35))
+        let image = User.current.profilePhoto.resize(targetSize: CGSize(width: 35, height: 35))
         button.imageView?.contentMode = .scaleAspectFit
         button.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
         button.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
@@ -29,10 +30,16 @@ class HomeFeedViewController: UIViewController {
         return button
     }()
     
+    @objc func onDidReceiveData(_ notification:Notification) {
+        let image = User.current.profilePhoto.resize(targetSize: CGSize(width: 35, height: 35))
+        profileButton.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileButton)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileButton)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: Notification.Name("didReceiveData"), object: nil)
         profileButton.addTarget(self, action: #selector(HomeFeedViewController.profileButtonTapped(sender:)), for: .touchDown)
         tableView.delegate = self
         tableView.dataSource = self
@@ -43,60 +50,21 @@ class HomeFeedViewController: UIViewController {
         hidingNavBarManager = HidingNavigationBarManager(viewController: self, scrollView: tableView)
         hidingNavBarManager?.delegate = self
         
-        homeStatuses = [HomeStatus]()
-        
-        TwitterClient.twitter?.getFollowersForScreenName("mEeLAmQbdmlqejh", successBlock: { (info) in
-            print(info)
-        }, errorBlock: { (error) in
-            
-        })
-        TwitterClient.twitter?.getFriendsForScreenName("mEeLAmQbdmlqejh", successBlock: { (info) in
-            print(info)
-        }, errorBlock: { (error) in
-            
-        })
-        TwitterClient.twitter?.getUserInformation(for: "mEeLAmQbdmlqejh", successBlock: { (info) in
-            //let e = info! as NSDictionary
-            //print(e)
-        }, errorBlock: { (error) in
-            
-        })
-        TwitterClient.twitter?.verifyCredentials(userSuccessBlock: { (username, userId) -> Void in
-            TwitterClient.twitter?.getHomeTimeline(sinceID: nil, count: 10, successBlock: { (statuses) -> Void in
-                let tatuses = statuses as! [NSDictionary]
-                print(tatuses[0])
-                for status in tatuses {
-                    let text = status["text"] as? String
-                    let retweet = status["retweet_count"] as? Int64
-                    let like = status["favorite_count"] as? Int64
-                    
-                    if let user = status["user"] as? NSDictionary {
-                        let profileImageUrl = user["profile_image_url_https"] as? String
-                        let screenName = user["screen_name"] as? String
-                        let name = user["name"] as? String
-                        let protected = user["protected"] as? Bool
-                        let verified = user["verified"] as? Bool
-                        
-                        let url = URL(string: profileImageUrl!.replacingOccurrences(of: "_normal", with: ""))!
-                        let profileImage = UIImageView()
-                        //profileImage.af_setImage(withURL: url)
-                        profileImage.af_setImage(withURL: url, completion: { (image) in
-                            self.homeStatuses?.append(HomeStatus(text: text, profileImage: profileImage.image, name: name, screenName: screenName, likes: like, retweets: retweet, isProtected: protected, isVerified: verified, in_reply_to_screen_name: ""))
-                            self.tableView.reloadData()
-                        })
-                        //profileImage.image = profileImage.image?.resize(targetSize: CGSize(width: 50, height: 50))
-                        
-                        
-                    }
-                }
-                self.tableView.reloadData()
-            }, errorBlock: { (error) -> Void in
-                print(error as Any)
-            })
-            
-        }) { (error) -> Void in
-            print(error as Any)
+        Requests.getHomeTimeline(sinceID: nil) { (tweet) in
+            self.homeStatuses.append(tweet)
+            self.tableView.reloadData()
         }
+//        TwitterClient.twitter?.getFollowersForScreenName("mEeLAmQbdmlqejh", successBlock: { (info) in
+//            print(info)
+//        }, errorBlock: { (error) in
+//
+//        })
+//        TwitterClient.twitter?.getFriendsForScreenName("mEeLAmQbdmlqejh", successBlock: { (info) in
+//            print(info)
+//        }, errorBlock: { (error) in
+//
+//        })
+
         //let extensionView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 200))
         //extensionView.backgroundColor = .red
         //hidingNavBarManager?.addExtensionView(extensionView)
@@ -130,17 +98,29 @@ class HomeFeedViewController: UIViewController {
     }
     
 }
+
 extension HomeFeedViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return homeStatuses?.count ?? 0
+        return homeStatuses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.identifier) as! TweetTableViewCell
         
-        cell.setup(tweet: homeStatuses![indexPath.item])
-        
+        cell.setup(tweet: homeStatuses[indexPath.item])
+
         return cell
+    }    
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("\(scrollView.contentOffset.y + scrollView.frame.height) and \(scrollView.contentSize.height + 50)")
+        if scrollView.contentOffset.y + scrollView.frame.height == scrollView.contentSize.height + 50{
+            let id = self.homeStatuses[homeStatuses.count - 1].id
+            Requests.getHomeTimeline(sinceID: "\(id!)") { (tweet) in
+                self.homeStatuses.append(tweet)
+                self.tableView.reloadData()
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -149,6 +129,12 @@ extension HomeFeedViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let controller = ExpandedTweetTableViewController()
+        Requests.getTweetInfo(by: "\(homeStatuses[indexPath.item].id!)") { (tweet) in
+            controller.tweet = tweet
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+        
     }
     
 }
@@ -165,4 +151,8 @@ extension HomeFeedViewController: HidingNavigationBarManagerDelegate{
     func hidingNavigationBarManagerShouldUpdateScrollViewInsets(_ manager: HidingNavigationBarManager, insets: UIEdgeInsets) -> Bool {
         return true
     }
+}
+
+protocol SideMenuDelegate: class {
+    func SideMenuClicked()
 }

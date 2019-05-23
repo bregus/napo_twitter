@@ -6,6 +6,7 @@ target 'twitter' do
   use_frameworks!
   pod 'STTwitter'
   pod "AlamofireImage"
+  #pod "LFTwitterProfile"
   pod 'HidingNavigationBar', '~> 2.0'
   # Pods for five
 

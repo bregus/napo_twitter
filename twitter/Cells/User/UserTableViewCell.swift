@@ -24,7 +24,7 @@ class UserTableViewCell: UITableViewCell {
         profileButton.imageView?.contentMode = .scaleAspectFit
         profileButton.layer.cornerRadius = profileButton.frame.width / 2
         profileButton.imageView?.layer.cornerRadius = profileButton.frame.width / 2
-        profileButton.setImage(User.profilePhoto, for: .normal)
+        profileButton.setImage(User.current.profilePhoto, for: .normal)
         decs.text = ""
         lockImage.invert()
     }

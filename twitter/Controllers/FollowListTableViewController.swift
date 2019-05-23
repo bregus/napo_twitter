@@ -10,9 +10,12 @@ import UIKit
 
 class FollowListTableViewController: UITableViewController {
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserTableViewCell.register(for: tableView) 
+        UserTableViewCell.register(for: tableView)
+        tableView.allowsSelection = false
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
