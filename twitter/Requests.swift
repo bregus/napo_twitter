@@ -29,6 +29,40 @@ class Requests {
             
         })
     }
+    
+    static func getFollowing(completion: ((_ IDs: [User]) -> Void)?) {
+        //        TwitterClient.twitter?.getFollowersForScreenName("mEeLAmQbdmlqejh", successBlock: { (info) in
+        //            print(info)
+        //        }, errorBlock: { (error) in
+        //
+        //        })
+                TwitterClient.twitter?.getFriendsForScreenName("mEeLAmQbdmlqejh", successBlock: { (info) in
+                    var following = [User]()
+                    if let statuses = info as! [NSDictionary]? {
+                        for status in statuses {
+                            let text = status["description"] as? String
+                            
+                            let _ = status["id"] as? Int64
+                            
+                            let profileImageUrl = status["profile_image_url_https"] as? String
+                            let screenName = "@\(status["screen_name"] ?? "")"
+                            let name = status["name"] as? String
+                            let protected = status["protected"] as? Bool
+                            let verified = status["verified"] as? Bool
+                            
+                            let url = URL(string: profileImageUrl!.replacingOccurrences(of: "_normal", with: ""))!
+                            let profileImage = UIImageView()
+                            profileImage.af_setImage(withURL: url, completion: { (image) in
+                                following.append(User(username: screenName, name: name!, profilePhoto: profileImage.image!, following: 0, followers: 0, isProtected: protected!, isVerified: verified!, description: text!))
+                            })
+                        }
+                        completion?(following)
+                    }
+                }, errorBlock: { (error) in
+        
+                })
+    }
+    
     static func getTweetInfo(by id: String?, completion: ((_ tweet: HomeStatus) -> Void)?) {
         TwitterClient.twitter?.getStatusesShowID(id, trimUser: 0, includeMyRetweet: 1, includeEntities: 1, useExtendedTweetMode: 1, successBlock: { (info) in
             if var status = info {

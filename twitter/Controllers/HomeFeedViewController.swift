@@ -54,16 +54,6 @@ class HomeFeedViewController: UIViewController {
             self.homeStatuses.append(tweet)
             self.tableView.reloadData()
         }
-//        TwitterClient.twitter?.getFollowersForScreenName("mEeLAmQbdmlqejh", successBlock: { (info) in
-//            print(info)
-//        }, errorBlock: { (error) in
-//
-//        })
-//        TwitterClient.twitter?.getFriendsForScreenName("mEeLAmQbdmlqejh", successBlock: { (info) in
-//            print(info)
-//        }, errorBlock: { (error) in
-//
-//        })
 
         //let extensionView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 200))
         //extensionView.backgroundColor = .red

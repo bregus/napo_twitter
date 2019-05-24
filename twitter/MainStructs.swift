@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import STTwitter
 
-class User {
+struct User {
     var username: String = ""
     var name: String = ""
     var profilePhoto: UIImage = #imageLiteral(resourceName: "lock")
@@ -18,6 +18,7 @@ class User {
     var followers: Int = 0
     var isProtected: Bool = false
     var isVerified: Bool = false
+    var description: String = ""
     static var current: User = User()
 }
 

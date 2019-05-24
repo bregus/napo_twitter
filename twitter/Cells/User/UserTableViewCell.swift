@@ -27,10 +27,19 @@ class UserTableViewCell: UITableViewCell {
         profileButton.setImage(User.current.profilePhoto, for: .normal)
         decs.text = ""
         lockImage.invert()
+        lockImage.isHidden = true
     }
     
-    func setup() {
-        //
+    func setup(user: User) {
+        decs.text = user.description
+        
+        profileButton.setImage(user.profilePhoto, for: .normal)
+        nickname.text = user.name
+        name.text = user.username
+        
+        if user.isProtected {
+            lockImage.isHidden = false
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
