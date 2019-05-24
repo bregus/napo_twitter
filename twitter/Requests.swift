@@ -27,7 +27,7 @@ class Requests {
     }
     
     static func getCurrentUserInfo() {
-        
+//        TwitterClient.twitter?.postFavoriteState(<#T##favoriteState: Bool##Bool#>, forStatusID: <#T##String!#>, successBlock: <#T##(([AnyHashable : Any]?) -> Void)!##(([AnyHashable : Any]?) -> Void)!##([AnyHashable : Any]?) -> Void#>, errorBlock: <#T##((Error?) -> Void)!##((Error?) -> Void)!##(Error?) -> Void#>)
         TwitterClient.twitter?.getUserInformation(for: "mEeLAmQbdmlqejh", successBlock: { (info) in
             User.current.username = "@\(info?["screen_name"] ?? "")"
             User.current.name = info?["name"] as! String

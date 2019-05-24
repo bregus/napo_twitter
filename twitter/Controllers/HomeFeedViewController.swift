@@ -16,6 +16,7 @@ class HomeFeedViewController: UIViewController {
     weak var delegate: SideMenuDelegate?
     var homeStatuses = [HomeStatus]()
     var lastTweetId: Int64?
+    var updating: Bool = false
     
     @IBOutlet weak var tableView: UITableView!
     var hidingNavBarManager: HidingNavigationBarManager?
@@ -96,18 +97,24 @@ extension HomeFeedViewController: UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.identifier) as! TweetTableViewCell
         
         cell.setup(tweet: homeStatuses[indexPath.item])
-
+        
         return cell
-    }    
+    }
+    
+    func loadMoreFeed() {
+        if updating {return}
+        updating = true
+        let id = self.homeStatuses[homeStatuses.count - 1].id
+        Requests.getHomeTimeline(sinceID: "\(id!)") { (tweet) in
+            self.homeStatuses.append(tweet)
+            self.tableView.reloadData()
+            self.updating = false
+        }
+    }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print("\(scrollView.contentOffset.y + scrollView.frame.height) and \(scrollView.contentSize.height + 50)")
-        if scrollView.contentOffset.y + scrollView.frame.height == scrollView.contentSize.height + 50{
-            let id = self.homeStatuses[homeStatuses.count - 1].id
-            Requests.getHomeTimeline(sinceID: "\(id!)") { (tweet) in
-                self.homeStatuses.append(tweet)
-                self.tableView.reloadData()
-            }
+        if scrollView.contentOffset.y + scrollView.frame.height > scrollView.contentSize.height + 50, scrollView.contentSize.height != 0{
+            loadMoreFeed()
         }
     }
     

@@ -38,11 +38,11 @@
                     </imageView>
                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j1l-Di-gxy">
                         <rect key="frame" x="16" y="29" width="50" height="50"/>
+                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="GqK-Ed-By4"/>
                             <constraint firstAttribute="height" constant="50" id="h1B-7b-eRa"/>
                         </constraints>
-                        <state key="normal" image="C4rWY7Vtp7g.jpg"/>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M4d-NV-b5B">
                         <rect key="frame" x="16" y="4" width="242" height="20"/>
@@ -195,7 +195,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="C4rWY7Vtp7g.jpg" width="604" height="604"/>
         <image name="like" width="54" height="49"/>
         <image name="lock" width="118" height="114"/>
         <image name="reply" width="49" height="49"/>
