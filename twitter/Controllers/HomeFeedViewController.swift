@@ -62,13 +62,11 @@ class HomeFeedViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         hidingNavBarManager?.viewWillAppear(animated)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         hidingNavBarManager?.viewDidLayoutSubviews()
     }
     

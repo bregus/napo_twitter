@@ -19,6 +19,7 @@ struct User {
     var isProtected: Bool = false
     var isVerified: Bool = false
     var description: String = ""
+    var isFollowing: Bool = false
     static var current: User = User()
 }
 

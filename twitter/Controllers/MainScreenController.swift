@@ -63,11 +63,9 @@ class MainScreenController: UIViewController, SideMenuDelegate, MenuSelected {
     func buttonTapped(with id: Int) {
         blackoutButtonTap((Any).self)
         if id == 1 || id == 2 {
-            Requests.getFollowing(completion: { (following) in
-                let controller = FollowListTableViewController()
-                controller.users = following
-                self.navigationController?.pushViewController(controller, animated: true)
-            })
+            let controller = FollowListTableViewController()
+            controller.dataType = id
+            self.navigationController?.pushViewController(controller, animated: true)
         }
     }
     
